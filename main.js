@@ -4,11 +4,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 // gör så jag kan använda dotenv
 require("dotenv").config();
-// gör så mina routes i filen authRoutes funkar
+// gör så mina routes i mapen routes funkar
 const authRoutes = require("./routes/authRoutes.js")
 const postroutes = require("./routes/post.js")
 const getroutes = require("./routes/get.js")
 const putroutes = require("./routes/put.js")
+const deleteroutes = require("./routes/delete.js")
 // gör så jag kan använda jsonwebtoken
 const jwt = require("jsonwebtoken")
 /*skapar app med express */
@@ -27,6 +28,7 @@ app.use("/api", authRoutes)
 app.use("/api", postroutes)
 app.use("/api", getroutes)
 app.use("/api", putroutes)
+app.use("/api", deleteroutes)
 
 app.get("/api/hidden", authenticateToken, (req,res)=>{
 
