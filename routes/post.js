@@ -18,9 +18,28 @@ const db = new sqlite3.Database(process.env.DATABASE);
 
 
 
+// function som skapar så jag kan använda token för min routes (authenticateToken).
+function authenticateToken(req,res,next) {
+const authHeader = req.headers["authorization"];
+const token = authHeader && authHeader.split(" ")[1]
+if(token== null)
+res.status(401).json({message: "you dont have acces to this route - you need token"})
+
+jwt.verify(token, process.env.JWT_SECRET_KEY, (err, email) =>{
+if(err) return res.status(403).json({message: "you have wrong JWT"})
+
+
+  req.email = email
+  next();
+})
+
+
+}
+
+
 
 // skapar ett post begäran där man kan lägga in ny hamburgare i tablelen burgers om du har authenticateToken.
-router.post("/burgers", async(req, res) => {
+router.post("/burgers",authenticateToken, async(req, res) => {
   try {
        let {burgername, weightprotein,accessoriesone,accessoriestwo,priceone,pricetwo} = req.body;
  
@@ -70,7 +89,7 @@ res.status(400).json({Message: "Error when input new burger"})
 
 
 // skapar ett post begäran där man kan lägga in ny tillbehör i tablelen accessories om du har authenticateToken.
-router.post("/accessories", async(req, res) => {
+router.post("/accessories",authenticateToken, async(req, res) => {
   try {
        let {accessoriesname, accessoriesprice,accessoriescontent} = req.body;
  
@@ -119,7 +138,7 @@ res.status(400).json({Message: "Error when input new accessories"})
 
 
 // skapar ett post begäran där man kan lägga in ny dipar i tablelen dips om du har authenticateToken.
-router.post("/dips", async(req, res) => {
+router.post("/dips",authenticateToken, async(req, res) => {
   try {
        let {dipsname, dipsprice,dipscontent} = req.body;
  
@@ -168,7 +187,7 @@ res.status(400).json({Message: "Error when input new dip"})
 
 
 // skapar ett post begäran där man kan lägga in ny dricka i tablelen drink om du har authenticateToken.
-router.post("/drink", async(req, res) => {
+router.post("/drink",authenticateToken, async(req, res) => {
   try {
        let {drinkname, drinkprice} = req.body;
  
@@ -216,7 +235,7 @@ res.status(400).json({Message: "Error when input new drink"})
 });
 
 // skapar ett post begäran där man kan lägga in ny övrigt i tablelen other om du har authenticateToken.
-router.post("/other", async(req, res) => {
+router.post("/other",authenticateToken, async(req, res) => {
   try {
        let {othername, otherprice} = req.body;
  

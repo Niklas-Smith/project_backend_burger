@@ -11,6 +11,8 @@ const bcrypt = require("bcrypt")
 // gör så jag kan använda jsonwebtoken
 const jwt = require("jsonwebtoken")
 
+
+
 // skapar databasen och connect.
 const db = new sqlite3.Database(process.env.DATABASE);
 
@@ -19,7 +21,7 @@ router.post("/register", async(req, res) => {
   try {
        let {email, password, username} = req.body;
  
-    if( !email || ! password || !username) {
+    if( !email || !password || !username) {
          return res.status(400).json({error: "must have email, password and username" })
 
     }
@@ -117,4 +119,4 @@ module.exports = router;
     "username" : "niklas"
 
   
-}    */
+}   */ 

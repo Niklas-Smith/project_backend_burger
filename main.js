@@ -20,6 +20,10 @@ const sqlite3 = require("sqlite3").verbose()
 const port = process.env.PORT || 3000
 /*gör så express kan användra bodyparser*/
 app.use(bodyParser.json())
+// gör så jag kan använda cors
+const cors = require("cors");
+// gör så att app använder cors
+app.use(cors())
 
 // skapar databasen och connect.
 const db = new sqlite3.Database(process.env.DATABASE);

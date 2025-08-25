@@ -81,9 +81,122 @@ res.json(rows)
 
 
 
+// skapar ett get begäran där man få ut en hamburgare baserat på ett id som finns i tabelen burgers.
+router.get("/burgers/:id", (req,res) => {
+
+const burgerid = req.params.id;
+
+const sql = 'SELECT * FROM burgers WHERE id = ?'
+
+db.all(sql, burgerid , (err, result) => {
+
+  if(err) {
+ return res.status(500).json({message:  "samething went wrong "  });
+
+      
+  } 
+
+    res.json(result)
+
+
+} );
+
+}) ;  
 
 
 
+
+// skapar ett get begäran där man få ut ett tillbehör baserat på ett id som finns i tabelen accessories.
+router.get("/accessories/:id", (req,res) => {
+
+const accessoriesid = req.params.id;
+
+const sql = 'SELECT * FROM accessories WHERE id = ?'
+
+db.all(sql, accessoriesid , (err, result) => {
+
+  if(err) {
+ return res.status(500).json({message:  "samething went wrong "  });
+
+      
+  } 
+
+    res.json(result)
+
+
+} );
+
+}) ;  
+
+
+
+// skapar ett get begäran där man få ut ett dippor baserat på ett id som finns i tabelen dips.
+router.get("/dips/:id", (req,res) => {
+
+const dippid = req.params.id;
+
+const sql = 'SELECT * FROM dips WHERE id = ?'
+
+db.all(sql, dippid , (err, result) => {
+
+  if(err) {
+ return res.status(500).json({message:  "samething went wrong "  });
+
+      
+  } 
+
+    res.json(result)
+
+
+} );
+
+}) ;  
+
+
+
+// skapar ett get begäran där man få ut ett dryck baserat på ett id som finns i tabelen drink.
+router.get("/drink/:id", (req,res) => {
+
+const drinkid = req.params.id;
+
+const sql = 'SELECT * FROM drink WHERE id = ?'
+
+db.all(sql, drinkid , (err, result) => {
+
+  if(err) {
+ return res.status(500).json({message:  "samething went wrong "  });
+
+      
+  } 
+
+    res.json(result)
+
+
+} );
+
+}) ;  
+
+// skapar ett get begäran där man få ut ett extra baserat på ett id som finns i tabelen other.
+router.get("/other/:id", (req,res) => {
+
+const otherid = req.params.id;
+
+const sql = 'SELECT * FROM other WHERE id = ?'
+
+db.all(sql, otherid , (err, result) => {
+
+  if(err) {
+ return res.status(500).json({message:  "samething went wrong "  });
+
+      
+  } 
+
+    res.json(result)
+
+
+} );
+
+}) ;  
 
 
 
